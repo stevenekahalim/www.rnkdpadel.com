@@ -5,161 +5,385 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Terms of Service - RNKD</title>
   <meta name="description" content="RNKD Terms of Service - Rules and guidelines for using our padel ranking app.">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --volt: #D2F802;
+      --volt-dark: #a8c602;
+      --pink: #FF375F;
+      --cyan: #64D2FF;
+      --mint: #30D158;
+      --orange: #FF9F0A;
+      --bg-primary: #000000;
+      --bg-secondary: #1C1C1E;
+      --bg-tertiary: #2C2C2E;
+      --text-primary: #FFFFFF;
+      --text-secondary: #8E8E93;
+      --text-muted: #636366;
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #171717;
-      color: #d4d4d4;
-      min-height: 100vh;
-      padding: 40px 20px;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
       line-height: 1.7;
     }
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 16px 24px;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
-    .back {
-      display: inline-flex;
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
       align-items: center;
-      gap: 8px;
-      color: #a3a3a3;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--volt);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: #000;
+    }
+    .nav-logo-text {
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--text-primary);
+      letter-spacing: -0.5px;
+    }
+    .nav-back {
+      color: var(--volt);
       text-decoration: none;
       font-size: 14px;
-      margin-bottom: 32px;
-      transition: color 0.2s;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity 0.2s;
     }
-    .back:hover { color: #CCFF00; }
-    h1 {
-      font-size: 36px;
+    .nav-back:hover { opacity: 0.8; }
+    .content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 120px 24px 80px;
+    }
+    .page-header {
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--bg-secondary);
+    }
+    .page-header h1 {
+      font-size: 40px;
       font-weight: 800;
-      color: #fff;
-      margin-bottom: 8px;
-    }
-    .updated {
-      color: #737373;
-      font-size: 14px;
-      margin-bottom: 40px;
-    }
-    .updated span { color: #CCFF00; }
-    h2 {
-      font-size: 18px;
-      font-weight: 700;
-      color: #fff;
-      margin-top: 32px;
+      letter-spacing: -1px;
       margin-bottom: 12px;
     }
-    p { margin-bottom: 16px; }
-    ul {
-      margin-bottom: 16px;
-      padding-left: 24px;
-    }
-    li { margin-bottom: 8px; }
-    .volt { color: #CCFF00; }
-    .warning {
-      background: #362000;
-      border-left: 4px solid #f59e0b;
-      padding: 16px 20px;
-      border-radius: 0 12px 12px 0;
-      margin: 20px 0;
-    }
-    .warning-title {
-      color: #fbbf24;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-    footer {
-      margin-top: 60px;
-      padding-top: 24px;
-      border-top: 1px solid #333;
-      text-align: center;
-      color: #525252;
+    .last-updated {
+      color: var(--text-muted);
       font-size: 14px;
+    }
+    .last-updated span {
+      color: var(--volt);
+      font-weight: 500;
+    }
+    section { margin-bottom: 40px; }
+    h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+    p {
+      color: var(--text-secondary);
+      font-size: 15px;
+      margin-bottom: 16px;
+    }
+    ul {
+      list-style: none;
+      margin-bottom: 16px;
+    }
+    li {
+      color: var(--text-secondary);
+      font-size: 15px;
+      padding-left: 24px;
+      position: relative;
+      margin-bottom: 10px;
+    }
+    li::before {
+      content: '•';
+      color: var(--volt);
+      position: absolute;
+      left: 8px;
+      font-weight: 700;
+    }
+    li strong { color: var(--text-primary); }
+    .warning-box {
+      background: rgba(255, 159, 10, 0.1);
+      border-left: 4px solid var(--orange);
+      border-radius: 0 12px 12px 0;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+    .warning-box h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--orange);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .warning-box p {
+      margin-bottom: 0;
+      font-size: 14px;
+    }
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(210, 248, 2, 0.1) 0%, rgba(100, 210, 255, 0.05) 100%);
+      border: 1px solid var(--bg-tertiary);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+    .highlight-box h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--volt);
+    }
+    .highlight-box p { margin-bottom: 0; }
+    .contact-box {
+      background: var(--bg-secondary);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+    }
+    .contact-box h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .contact-box a {
+      color: var(--volt);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .contact-box a:hover { text-decoration: underline; }
+    footer {
+      background: var(--bg-primary);
+      border-top: 1px solid var(--bg-secondary);
+      padding: 32px 24px;
+      text-align: center;
+    }
+    footer p {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin: 0;
+    }
+    footer a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      margin: 0 12px;
+    }
+    footer a:hover { color: var(--volt); }
+    @media (max-width: 768px) {
+      .content { padding: 100px 20px 60px; }
+      .page-header h1 { font-size: 32px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <a href="/" class="back">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      Back to RNKD
-    </a>
-
-    <h1>Terms of Service</h1>
-    <p class="updated">Last updated: <span>January 2026</span></p>
-
-    <h2>1. Acceptance of Terms</h2>
-    <p>By accessing or using the RNKD mobile application ("App"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, do not use the App.</p>
-
-    <h2>2. Description of Service</h2>
-    <p>RNKD is a padel sports ranking application that allows users to:</p>
-    <ul>
-      <li>Record and track match results</li>
-      <li>View rankings and leaderboards</li>
-      <li>Join clubs and leagues</li>
-      <li>Connect with other players</li>
-    </ul>
-
-    <h2>3. User Accounts</h2>
-    <p>To use the App, you must create an account using your phone number. You are responsible for maintaining the confidentiality of your account and for all activities that occur under your account.</p>
-    <p>You agree to:</p>
-    <ul>
-      <li>Provide accurate information</li>
-      <li>Keep your account secure</li>
-      <li>Notify us of any unauthorized use</li>
-      <li>Not share your account with others</li>
-    </ul>
-
-    <h2>4. User Conduct</h2>
-    <p>You agree not to:</p>
-    <ul>
-      <li>Submit false match results or manipulate rankings</li>
-      <li>Harass, abuse, or harm other users</li>
-      <li>Use the App for any illegal purpose</li>
-      <li>Attempt to gain unauthorized access to the App</li>
-      <li>Interfere with the proper functioning of the App</li>
-      <li>Create multiple accounts to manipulate rankings</li>
-    </ul>
-
-    <h2>5. Match Recording</h2>
-    <div class="warning">
-      <div class="warning-title">Fair Play Policy</div>
-      <div>False reporting of match results may result in immediate account suspension.</div>
+  <nav class="nav">
+    <div class="nav-container">
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-icon">R</div>
+        <span class="nav-logo-text">RNKD</span>
+      </a>
+      <a href="/" class="nav-back">← Back to Home</a>
     </div>
-    <p>When recording matches, you agree that:</p>
-    <ul>
-      <li>Results must be accurate and honest</li>
-      <li>Both players should verify match results when possible</li>
-      <li>Disputed results may be reviewed by administrators</li>
-      <li>False reporting may result in account suspension</li>
-    </ul>
+  </nav>
 
-    <h2>6. Intellectual Property</h2>
-    <p>The App and its content, features, and functionality are owned by RNKD and are protected by copyright, trademark, and other intellectual property laws.</p>
+  <main class="content">
+    <div class="page-header">
+      <h1>Terms of Service</h1>
+      <p class="last-updated">Last updated: <span>January 2026</span></p>
+    </div>
 
-    <h2>7. Disclaimer of Warranties</h2>
-    <p>The App is provided "as is" without warranties of any kind, either express or implied. We do not guarantee that the App will be uninterrupted, secure, or error-free.</p>
+    <section>
+      <h2>1. Acceptance of Terms</h2>
+      <p>By accessing or using the RNKD mobile application ("App"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, do not use the App.</p>
+      <p>These Terms constitute a legally binding agreement between you and RNKD. Please read them carefully before using our services.</p>
+    </section>
 
-    <h2>8. Limitation of Liability</h2>
-    <p>To the maximum extent permitted by law, RNKD shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the App.</p>
+    <section>
+      <h2>2. Description of Service</h2>
+      <p>RNKD is a padel sports ranking application that allows users to:</p>
+      <ul>
+        <li>Record and track match results in real-time</li>
+        <li>View rankings and leaderboards (regional and national)</li>
+        <li>Join clubs, communities, and leagues</li>
+        <li>Connect and compete with other padel players</li>
+        <li>Track personal statistics and performance trends</li>
+      </ul>
+    </section>
 
-    <h2>9. Account Termination</h2>
-    <p>We reserve the right to suspend or terminate your account at any time for violations of these Terms or for any other reason at our discretion.</p>
-    <p>You may delete your account at any time through the App settings.</p>
+    <section>
+      <h2>3. User Accounts</h2>
+      <p>To use the App, you must create an account using your phone number, Google account, or Apple ID. You are responsible for maintaining the confidentiality of your account and for all activities that occur under your account.</p>
+      <p>You agree to:</p>
+      <ul>
+        <li>Provide accurate and complete information during registration</li>
+        <li>Keep your account credentials secure and confidential</li>
+        <li>Notify us immediately of any unauthorized use of your account</li>
+        <li>Not share your account or transfer it to another person</li>
+        <li>Not create multiple accounts for the purpose of manipulating rankings</li>
+      </ul>
+    </section>
 
-    <h2>10. Changes to Terms</h2>
-    <p>We may modify these Terms at any time. Continued use of the App after changes constitutes acceptance of the modified Terms.</p>
+    <section>
+      <h2>4. User Conduct</h2>
+      <p>You agree to use RNKD responsibly and not to:</p>
+      <ul>
+        <li>Submit false, inaccurate, or fraudulent match results</li>
+        <li>Manipulate rankings through collusion or fake matches</li>
+        <li>Harass, abuse, threaten, or harm other users</li>
+        <li>Use the App for any illegal or unauthorized purpose</li>
+        <li>Attempt to gain unauthorized access to the App or its systems</li>
+        <li>Interfere with the proper functioning of the App</li>
+        <li>Impersonate another person or entity</li>
+        <li>Engage in any activity that could damage our reputation or services</li>
+      </ul>
+    </section>
 
-    <h2>11. Governing Law</h2>
-    <p>These Terms shall be governed by and construed in accordance with the laws of Indonesia, without regard to its conflict of law provisions.</p>
+    <section>
+      <h2>5. Match Recording & Fair Play</h2>
 
-    <h2>12. Contact</h2>
-    <p>For questions about these Terms, please contact us at:</p>
-    <p>Email: <a href="mailto:support@rnkdpadel.com" class="volt">support@rnkdpadel.com</a></p>
+      <div class="warning-box">
+        <h3>⚠️ Fair Play Policy</h3>
+        <p>Submitting false match results or manipulating rankings is a serious violation. This may result in immediate account suspension or permanent ban from RNKD.</p>
+      </div>
 
-    <footer>
-      &copy; 2026 RNKD. All rights reserved.
-    </footer>
-  </div>
+      <p>When recording matches, you agree that:</p>
+      <ul>
+        <li>All match results must be accurate and honestly reported</li>
+        <li>Both players should verify match results when possible</li>
+        <li>Disputed results may be reviewed and investigated by administrators</li>
+        <li>False reporting will result in penalties including account suspension</li>
+        <li>Repeated violations may result in permanent account termination</li>
+      </ul>
+
+      <div class="highlight-box">
+        <h3>Verification System</h3>
+        <p>When both players verify a match result, it carries more weight in the ranking algorithm. We encourage all players to verify matches for the most accurate rankings.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>6. Leagues and Communities</h2>
+      <p>When participating in leagues or communities:</p>
+      <ul>
+        <li>Respect the rules and guidelines set by league administrators</li>
+        <li>Club owners and administrators have authority to manage their communities</li>
+        <li>RNKD reserves the right to remove users from any league for violations</li>
+        <li>League-specific rules may apply in addition to these Terms</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>7. Intellectual Property</h2>
+      <p>The App and its content, features, and functionality (including but not limited to design, text, graphics, logos, and software) are owned by RNKD and are protected by copyright, trademark, and other intellectual property laws.</p>
+      <p>You may not copy, modify, distribute, sell, or lease any part of our services without our written permission.</p>
+    </section>
+
+    <section>
+      <h2>8. Disclaimer of Warranties</h2>
+      <p>The App is provided "as is" and "as available" without warranties of any kind, either express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, or non-infringement.</p>
+      <p>We do not guarantee that:</p>
+      <ul>
+        <li>The App will be uninterrupted, secure, or error-free</li>
+        <li>Results from using the App will be accurate or reliable</li>
+        <li>The quality of the service will meet your expectations</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>9. Limitation of Liability</h2>
+      <p>To the maximum extent permitted by applicable law, RNKD and its affiliates, officers, employees, and partners shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data, or goodwill, arising from:</p>
+      <ul>
+        <li>Your use or inability to use the App</li>
+        <li>Any unauthorized access to your personal data</li>
+        <li>Any errors or omissions in the content</li>
+        <li>Any conduct of third parties on the App</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>10. Account Termination</h2>
+      <p>We reserve the right to suspend or terminate your account at any time for:</p>
+      <ul>
+        <li>Violations of these Terms of Service</li>
+        <li>Fraudulent or illegal activities</li>
+        <li>Actions that harm other users or the platform</li>
+        <li>Any other reason at our discretion</li>
+      </ul>
+      <p>You may delete your account at any time through the App settings. Upon deletion, your personal data will be removed in accordance with our Privacy Policy.</p>
+    </section>
+
+    <section>
+      <h2>11. Changes to Terms</h2>
+      <p>We may modify these Terms at any time. We will notify you of significant changes through the App or by other means. Your continued use of the App after changes constitutes acceptance of the modified Terms.</p>
+      <p>If you disagree with the changes, you should stop using the App and delete your account.</p>
+    </section>
+
+    <section>
+      <h2>12. Governing Law</h2>
+      <p>These Terms shall be governed by and construed in accordance with the laws of Indonesia, without regard to its conflict of law provisions. Any disputes arising from these Terms shall be resolved in the courts of Indonesia.</p>
+    </section>
+
+    <section>
+      <h2>13. Severability</h2>
+      <p>If any provision of these Terms is found to be unenforceable or invalid, that provision shall be limited or eliminated to the minimum extent necessary, and the remaining provisions shall remain in full force and effect.</p>
+    </section>
+
+    <section>
+      <h2>14. Contact Us</h2>
+      <div class="contact-box">
+        <h3>Questions about these Terms?</h3>
+        <p>Email us at <a href="mailto:support@rnkdpadel.com">support@rnkdpadel.com</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      <a href="/">Home</a>
+      <a href="/privacy-policy">Privacy Policy</a>
+      <a href="mailto:support@rnkdpadel.com">Contact</a>
+    </p>
+    <p style="margin-top: 16px;">&copy; 2026 RNKD. All rights reserved.</p>
+  </footer>
 </body>
 </html>
