@@ -64,6 +64,217 @@
       overflow-x: hidden;
     }
 
+    /* ==================== GLOBAL AMBIENT BACKGROUND ==================== */
+    .ambient-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    /* Subtle noise/grain texture overlay */
+    .noise-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      mix-blend-mode: overlay;
+      animation: noiseShift 0.5s steps(5) infinite;
+    }
+
+    @keyframes noiseShift {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(-2%, -2%); }
+      50% { transform: translate(2%, 2%); }
+      75% { transform: translate(-2%, 2%); }
+    }
+
+    /* Subtle animated grid */
+    .grid-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image:
+        linear-gradient(rgba(210, 248, 2, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(210, 248, 2, 0.015) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 20%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 20%, transparent 70%);
+      animation: gridPulse 15s ease-in-out infinite;
+    }
+
+    @keyframes gridPulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    /* Floating gradient orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.4;
+      animation: orbFloat 20s ease-in-out infinite;
+    }
+
+    .orb-1 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(210, 248, 2, 0.15) 0%, transparent 70%);
+      top: -10%;
+      left: -10%;
+      animation-delay: 0s;
+      animation-duration: 25s;
+    }
+
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(48, 209, 88, 0.12) 0%, transparent 70%);
+      top: 20%;
+      right: -15%;
+      animation-delay: -5s;
+      animation-duration: 30s;
+    }
+
+    .orb-3 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(100, 210, 255, 0.08) 0%, transparent 70%);
+      bottom: 20%;
+      left: 10%;
+      animation-delay: -10s;
+      animation-duration: 22s;
+    }
+
+    .orb-4 {
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, rgba(210, 248, 2, 0.1) 0%, transparent 70%);
+      bottom: -5%;
+      right: 20%;
+      animation-delay: -15s;
+      animation-duration: 28s;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+      }
+      25% {
+        transform: translate(30px, -40px) scale(1.05);
+      }
+      50% {
+        transform: translate(-20px, 20px) scale(0.95);
+      }
+      75% {
+        transform: translate(40px, 30px) scale(1.02);
+      }
+    }
+
+    /* Aurora/flowing gradient effect */
+    .aurora {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100vh;
+      background:
+        linear-gradient(135deg,
+          transparent 0%,
+          rgba(210, 248, 2, 0.03) 25%,
+          transparent 50%,
+          rgba(48, 209, 88, 0.02) 75%,
+          transparent 100%
+        );
+      background-size: 400% 400%;
+      animation: auroraFlow 20s ease infinite;
+    }
+
+    @keyframes auroraFlow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    /* Subtle vignette */
+    .vignette {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.4) 100%);
+      pointer-events: none;
+    }
+
+    /* Floating particles */
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: var(--volt);
+      border-radius: 50%;
+      opacity: 0;
+      animation: particleFloat 15s ease-in-out infinite;
+    }
+
+    .particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 18s; }
+    .particle:nth-child(2) { left: 20%; animation-delay: -3s; animation-duration: 22s; }
+    .particle:nth-child(3) { left: 30%; animation-delay: -6s; animation-duration: 16s; }
+    .particle:nth-child(4) { left: 40%; animation-delay: -9s; animation-duration: 20s; }
+    .particle:nth-child(5) { left: 50%; animation-delay: -2s; animation-duration: 24s; }
+    .particle:nth-child(6) { left: 60%; animation-delay: -5s; animation-duration: 17s; }
+    .particle:nth-child(7) { left: 70%; animation-delay: -8s; animation-duration: 21s; }
+    .particle:nth-child(8) { left: 80%; animation-delay: -1s; animation-duration: 19s; }
+    .particle:nth-child(9) { left: 90%; animation-delay: -4s; animation-duration: 23s; }
+    .particle:nth-child(10) { left: 15%; animation-delay: -7s; animation-duration: 25s; }
+    .particle:nth-child(11) { left: 35%; animation-delay: -10s; animation-duration: 15s; }
+    .particle:nth-child(12) { left: 55%; animation-delay: -12s; animation-duration: 26s; }
+    .particle:nth-child(13) { left: 75%; animation-delay: -14s; animation-duration: 14s; }
+    .particle:nth-child(14) { left: 85%; animation-delay: -11s; animation-duration: 27s; }
+    .particle:nth-child(15) { left: 25%; animation-delay: -13s; animation-duration: 20s; }
+
+    @keyframes particleFloat {
+      0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.6;
+      }
+      90% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-20vh) scale(1);
+        opacity: 0;
+      }
+    }
+
+    /* Main content needs z-index above ambient */
+    .nav, .hero, .brands, .features, .leagues, .how-it-works, .cta, .faq, footer {
+      position: relative;
+      z-index: 1;
+    }
+
     /* ==================== LOGO ==================== */
     .logo-svg {
       display: inline-block;
@@ -233,6 +444,32 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      position: relative;
+    }
+
+    /* Subtle shimmer on gradient text */
+    .hero-title .gradient::after {
+      content: 'Rank Up.';
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        transparent 100%
+      );
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 3s ease-in-out infinite;
+      opacity: 0.5;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
     }
 
     .hero-subtitle {
@@ -272,9 +509,35 @@
       color: #000;
     }
 
+    .btn-primary {
+      background: var(--volt);
+      color: #000;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      animation: btnShine 3s ease-in-out infinite;
+    }
+
+    @keyframes btnShine {
+      0%, 100% { left: -100%; }
+      50% { left: 100%; }
+    }
+
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 16px 48px var(--volt-glow);
+      box-shadow:
+        0 16px 48px var(--volt-glow),
+        0 0 40px rgba(210, 248, 2, 0.3),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
     }
 
     .btn-secondary {
@@ -307,9 +570,15 @@
       box-shadow:
         0 60px 120px -20px rgba(0, 0, 0, 0.8),
         0 0 0 1px var(--border-light),
+        0 0 80px -20px rgba(210, 248, 2, 0.15),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
       transform: rotateY(-5deg) rotateX(5deg);
-      animation: phoneFloat 6s ease-in-out infinite;
+      animation: phoneFloat 6s ease-in-out infinite, phoneGlow 4s ease-in-out infinite;
+    }
+
+    @keyframes phoneGlow {
+      0%, 100% { box-shadow: 0 60px 120px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--border-light), 0 0 60px -20px rgba(210, 248, 2, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
+      50% { box-shadow: 0 60px 120px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--border-light), 0 0 100px -20px rgba(210, 248, 2, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
     }
 
     @keyframes phoneFloat {
@@ -592,9 +861,21 @@
     }
 
     .feature-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-8px);
       border-color: var(--border-light);
-      box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.5);
+      box-shadow:
+        0 20px 40px -20px rgba(0, 0, 0, 0.5),
+        0 0 60px -30px var(--volt);
+    }
+
+    /* Subtle glow animation on feature icons */
+    .feature-icon {
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover .feature-icon {
+      box-shadow: 0 0 20px rgba(210, 248, 2, 0.2);
+      transform: scale(1.05);
     }
 
     .feature-icon {
@@ -673,11 +954,22 @@
       filter: blur(60px);
       opacity: 0.3;
       pointer-events: none;
+      animation: leagueGlowPulse 4s ease-in-out infinite;
     }
 
-    .league-card.liga1 .league-glow { background: var(--volt); }
-    .league-card.liga2 .league-glow { background: var(--cyan); }
-    .league-card.liga3 .league-glow { background: var(--orange); }
+    @keyframes leagueGlowPulse {
+      0%, 100% { opacity: 0.25; transform: translateX(-50%) scale(1); }
+      50% { opacity: 0.4; transform: translateX(-50%) scale(1.1); }
+    }
+
+    .league-card.liga1 .league-glow { background: var(--volt); animation-delay: 0s; }
+    .league-card.liga2 .league-glow { background: var(--cyan); animation-delay: -1.3s; }
+    .league-card.liga3 .league-glow { background: var(--orange); animation-delay: -2.6s; }
+
+    .league-card:hover .league-glow {
+      opacity: 0.5;
+      transform: translateX(-50%) scale(1.2);
+    }
 
     .league-badge {
       display: inline-block;
@@ -1053,6 +1345,35 @@
   </style>
 </head>
 <body>
+  <!-- Ambient Background Effects -->
+  <div class="ambient-bg">
+    <div class="aurora"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+    <div class="grid-overlay"></div>
+    <div class="particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+    <div class="noise-overlay"></div>
+    <div class="vignette"></div>
+  </div>
+
   <!-- Shared SVG Definitions -->
   <svg style="position: absolute; width: 0; height: 0;">
     <defs>
