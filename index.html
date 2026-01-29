@@ -445,31 +445,31 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       position: relative;
+      display: inline-block;
     }
 
-    /* Subtle shimmer on gradient text */
+    /* Subtle shimmer sweep on gradient text */
     .hero-title .gradient::after {
-      content: 'Rank Up.';
+      content: '';
       position: absolute;
-      left: 0;
       top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       background: linear-gradient(
         90deg,
         transparent 0%,
-        rgba(255, 255, 255, 0.4) 50%,
+        rgba(255, 255, 255, 0.15) 50%,
         transparent 100%
       );
       background-size: 200% 100%;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: shimmer 3s ease-in-out infinite;
-      opacity: 0.5;
+      animation: shimmer 4s ease-in-out infinite;
+      pointer-events: none;
     }
 
     @keyframes shimmer {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
+      0%, 100% { background-position: -200% 0; opacity: 0; }
+      50% { background-position: 200% 0; opacity: 1; }
     }
 
     .hero-subtitle {
