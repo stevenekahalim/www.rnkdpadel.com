@@ -1,4 +1,20 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+    "rewrites": [
+          { "source": "/match/:id", "destination": "/match.html" },
+          { "source": "/player/:id", "destination": "/match.html" },
+          { "source": "/league/:id", "destination": "/match.html" },
+          { "source": "/tournament/:id", "destination": "/match.html" }
+    ],
+    "headers": [
+          {
+                  "source": "/.well-known/apple-app-site-association",
+                  "headers": [{ "key": "Content-Type", "value": "application/json" }]
+          },
+          {
+                  "source": "/.well-known/assetlinks.json",
+                  "headers": [{ "key": "Content-Type", "value": "application/json" }]
+          }
+    ]
 }
