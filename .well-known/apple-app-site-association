@@ -1,0 +1,14 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["83633LA75F.com.rnkd.app"],
+        "paths": ["/match/*", "/player/*", "/league/*", "/tournament/*", "/messages/*"]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": ["83633LA75F.com.rnkd.app"]
+  }
+}
