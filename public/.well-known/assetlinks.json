@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.rnkd.app",
+      "sha256_cert_fingerprints": [
+        "22:CC:13:56:D5:38:9D:6A:BB:FF:41:EA:6B:3A:5D:EE:03:38:1E:99:0E:84:20:F6:D2:AF:AA:27:2F:3D:15:08"
+      ]
+    }
+  }
+]
