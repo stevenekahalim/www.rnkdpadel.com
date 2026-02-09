@@ -5,9 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Match Details - RNKD</title>
   <meta name="description" content="View match details on RNKD - The definitive padel ranking app">
-  <meta property="og:title" content="Match Details - RNKD">
-  <meta property="og:description" content="View this padel match on RNKD">
+  <!-- Open Graph for social previews (WhatsApp, iMessage, etc.) -->
+  <meta property="og:title" content="RNKD Padel Match">
+  <meta property="og:description" content="Check out this padel match on RNKD — the definitive padel ranking app">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RNKD">
+  <meta property="og:image" content="https://rnkdpadel.com/og-match.png">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -22,18 +25,19 @@
       padding: 20px;
       text-align: center;
     }
-    .logo { font-size: 48px; font-weight: 800; color: #D2F802; margin-bottom: 8px; }
+    .logo { font-size: 48px; font-weight: 800; color: #D2F802; margin-bottom: 4px; letter-spacing: -1px; }
     .tagline { color: #888; font-size: 14px; margin-bottom: 40px; }
     .card {
-      background: #1a1a1a;
-      border: 1px solid #333;
-      border-radius: 16px;
-      padding: 32px;
-      max-width: 400px;
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 20px;
+      padding: 32px 24px;
+      max-width: 380px;
       width: 100%;
     }
-    h1 { font-size: 24px; margin-bottom: 8px; }
-    .match-id { color: #888; font-size: 12px; margin-bottom: 24px; word-break: break-all; }
+    .icon { font-size: 48px; margin-bottom: 16px; }
+    h1 { font-size: 22px; margin-bottom: 6px; font-weight: 700; }
+    .subtitle { color: #999; font-size: 14px; margin-bottom: 28px; line-height: 1.5; }
     .btn {
       display: block;
       width: 100%;
@@ -42,29 +46,43 @@
       font-size: 16px;
       font-weight: 600;
       text-decoration: none;
-      margin-bottom: 12px;
-      transition: opacity 0.2s;
+      margin-bottom: 10px;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.2s, transform 0.1s;
+      text-align: center;
     }
     .btn:hover { opacity: 0.9; }
+    .btn:active { transform: scale(0.98); }
     .btn-primary { background: #D2F802; color: #000; }
-    .btn-secondary { background: #333; color: #fff; }
-    .stores { display: flex; gap: 12px; margin-top: 24px; }
-    .stores a { flex: 1; }
-    .stores img { height: 44px; width: auto; }
-    .footer { margin-top: 40px; color: #666; font-size: 12px; }
+    .btn-outline { background: transparent; color: #fff; border: 1px solid #333; }
+    .divider { color: #555; font-size: 12px; margin: 16px 0; text-transform: uppercase; letter-spacing: 1px; }
+    .stores { display: flex; gap: 10px; margin-top: 8px; }
+    .stores a { flex: 1; display: flex; align-items: center; justify-content: center; }
+    .stores img { height: 40px; width: auto; }
+    .footer { margin-top: 40px; color: #444; font-size: 11px; }
+    .status { color: #666; font-size: 12px; margin-top: 12px; min-height: 18px; }
+    @media (max-width: 400px) {
+      .card { padding: 24px 20px; }
+      .stores img { height: 36px; }
+    }
   </style>
 </head>
 <body>
   <div class="logo">RNKD</div>
   <p class="tagline">The definitive padel ranking app</p>
-  
+
   <div class="card">
+    <div class="icon">🏸</div>
     <h1>View Match Details</h1>
-    <p class="match-id" id="matchId">Loading...</p>
-    
-    <a href="#" class="btn btn-primary" id="openApp">Open in RNKD App</a>
-    <a href="#" class="btn btn-secondary" id="deepLink">Try Deep Link</a>
-    
+    <p class="subtitle">Open in the RNKD app to see full match details, scores, and player stats.</p>
+
+    <button class="btn btn-primary" id="openApp" onclick="openInApp()">Open in RNKD App</button>
+
+    <p class="status" id="status"></p>
+
+    <p class="divider">don't have the app?</p>
+
     <div class="stores">
       <a href="https://apps.apple.com/app/rnkd/id6740001495" target="_blank">
         <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on App Store">
@@ -74,24 +92,62 @@
       </a>
     </div>
   </div>
-  
-  <p class="footer">© 2026 RNKD. All rights reserved.</p>
+
+  <p class="footer">&copy; 2026 RNKD. All rights reserved.</p>
 
   <script>
-    const path = window.location.pathname;
-    const matchId = path.split('/match/')[1]?.split('/')[0] || path.split('/').pop();
-    
-    document.getElementById('matchId').textContent = 'Match ID: ' + (matchId || 'Unknown');
-    
-    const deepLink = 'rnkd://match/' + matchId;
-    const universalLink = 'https://www.rnkdpadel.com/match/' + matchId;
-    
-    document.getElementById('openApp').href = deepLink;
-    document.getElementById('deepLink').href = universalLink;
-    
-    // Try to open the app automatically
-    if (matchId && matchId !== 'Unknown') {
-      setTimeout(() => { window.location.href = deepLink; }, 500);
+    // Extract match ID from URL path
+    // URL format: /match/{uuid} or /player/{uuid} or /tournament/{uuid} etc.
+    var path = window.location.pathname;
+    var segments = path.split('/').filter(Boolean); // ['match', 'uuid']
+    var routeType = segments[0] || 'match';
+    var entityId = segments[1] || '';
+
+    // Construct deep link
+    var deepLink = 'rnkd://' + routeType + '/' + entityId;
+
+    // Update page title based on route type
+    var titles = {
+      'match': 'View Match Details',
+      'player': 'View Player Profile',
+      'tournament': 'View Tournament',
+      'league': 'View League'
+    };
+    var h1 = document.querySelector('h1');
+    if (h1 && titles[routeType]) {
+      h1.textContent = titles[routeType];
+    }
+
+    /**
+     * Open the match in the RNKD app.
+     * Uses an iframe trick to attempt the deep link without changing the page URL.
+     * If the app isn't installed, shows a helpful message.
+     */
+    function openInApp() {
+      var statusEl = document.getElementById('status');
+      statusEl.textContent = 'Opening app...';
+
+      // Use hidden iframe to try the custom scheme — this does NOT change the page URL
+      var iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      iframe.src = deepLink;
+      document.body.appendChild(iframe);
+
+      // Also try window.open as backup for some Android browsers
+      var start = Date.now();
+
+      // Check after 1.5s if the app opened (page would have lost focus)
+      setTimeout(function() {
+        // If less than 2s passed and page still has focus, app probably didn't open
+        if (document.hasFocus() && (Date.now() - start) < 3000) {
+          statusEl.textContent = 'App not found. Download it below!';
+          statusEl.style.color = '#D2F802';
+        }
+        // Clean up iframe
+        if (iframe.parentNode) {
+          iframe.parentNode.removeChild(iframe);
+        }
+      }, 1500);
     }
   </script>
 </body>
