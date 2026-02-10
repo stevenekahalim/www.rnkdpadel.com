@@ -3,7 +3,7 @@
     "apps": [],
     "details": [
       {
-        "appID": "83633LA75F.com.rnkd.app",
+        "appIDs": ["83633LA75F.com.rnkd.app"],
         "paths": [
           "/match/*",
           "/player/*",
