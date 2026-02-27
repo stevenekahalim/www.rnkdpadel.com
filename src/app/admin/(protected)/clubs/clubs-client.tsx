@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { updateClubLiga } from './actions'
 
-const LIGA_LABELS: Record<string, string> = { liga1: 'Liga 1 Men', liga1_women: 'Liga 1 Women', liga2: 'Liga 2' }
 const GROUPS = [
   { key: 'liga1', label: 'Liga 1 (Men)' },
   { key: 'liga1_women', label: 'Liga 1 (Women)' },

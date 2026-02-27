@@ -28,7 +28,7 @@ export async function voidMatch(
     if (error) {
       return {
         success: false,
-        error: error.message || 'Failed to void match',
+        error: error instanceof Error ? error.message : 'Failed to void match',
       }
     }
 

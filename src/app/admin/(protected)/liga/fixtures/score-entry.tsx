@@ -3,11 +3,6 @@
 import { useState, useEffect } from 'react'
 import { enterScores } from './actions'
 
-interface Player {
-  id: string
-  name: string
-}
-
 interface Match {
   id: string
   match_number: number
@@ -79,7 +74,7 @@ export function ScoreEntry({ fixture, matches, playerMap }: ScoreEntryProps) {
     const numValue = parseInt(value) || 0
     const currentScore = scores[matchNumber] || {}
 
-    let newScore = {
+    const newScore = {
       ...currentScore,
       [field]: numValue,
     }
@@ -219,7 +214,7 @@ export function ScoreEntry({ fixture, matches, playerMap }: ScoreEntryProps) {
               if (!score) return null
 
               const homeWins = score.homeSetsWon > score.awaySetsWon
-              const awayWins = score.awaySetsWon > score.homeSetsWon
+              const _awayWins = score.awaySetsWon > score.homeSetsWon
 
               return (
                 <div key={match.id} className="p-3 bg-gray-50 rounded border border-gray-200">
@@ -300,7 +295,7 @@ export function ScoreEntry({ fixture, matches, playerMap }: ScoreEntryProps) {
           if (!score) return null
 
           const set3Needed = needsSet3(match.match_number)
-          const set3Disabled = shouldDisableSet3(match.match_number)
+          const _set3Disabled = shouldDisableSet3(match.match_number)
 
           return (
             <div key={match.id} className="card">

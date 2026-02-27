@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { createAdminClient } from '@/lib/supabase-admin'
 import { PageHeader } from '@/components/page-header'
 import { AddFixtureButton } from './add-fixture-button'
